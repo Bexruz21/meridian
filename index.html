@@ -2269,32 +2269,32 @@
       .extra-img-strip img {
         height: 220px !important;
       }
+    }
 
-
-      /* ========================================================
+    /* ========================================================
        SMALL MOBILE (max-width: 420px)
     ======================================================== */
-      @media (max-width: 420px) {
-        .hero-title {
-          font-size: 64px;
-        }
-
-        .about-images {
-          height: 260px;
-        }
-
-        .gallery-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .g-item:nth-child(n) {
-          height: 200px !important;
-        }
-
-        .accom-card img {
-          height: 240px;
-        }
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: 64px;
       }
+
+      .about-images {
+        height: 260px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .g-item:nth-child(n) {
+        height: 200px !important;
+      }
+
+      .accom-card img {
+        height: 240px;
+      }
+    }
   </style>
 </head>
 
@@ -2941,12 +2941,13 @@
 
   <!-- LOCATION -->
   <div class="location-section" id="location">
+
     <div class="location-map">
-      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1000&q=80" alt="Xarita">
-      <div class="map-pin">
-        <div class="pin-dot"></div>
-        <div class="pin-label">Meridian Tudakul</div>
-      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12263.128103378387!2d64.76140074117504!3d39.789446838268056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f5023de3e162319%3A0xd2606299581f1e7a!2sMERIDIAN%20tudakul!5e0!3m2!1sru!2s!4v1779789683871!5m2!1sru!2s"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="location-info">
       <div class="section-tag reveal">
@@ -2996,8 +2997,8 @@
           <div>
             <div class="detail-label"><span data-lang="uz">Ish vaqti</span><span data-lang="ru">Часы работы</span></div>
             <div class="detail-value">
-              <span data-lang="uz">Mavsumiy — yoz<br>Har kuni: 09:00 — 22:00</span>
-              <span data-lang="ru">Сезонно — лето<br>Ежедневно: 09:00 — 22:00</span>
+              <span data-lang="uz">Mavsumiy — yoz<br>Har kuni: 09:00 — 20:00</span>
+              <span data-lang="ru">Сезонно — лето<br>Ежедневно: 09:00 — 20:00</span>
             </div>
           </div>
         </div>
@@ -3039,11 +3040,8 @@
           <li><a href="#"><span data-lang="uz">Banya & Spa</span><span data-lang="ru">Баня & Спа</span></a></li>
           <li><a href="#"><span data-lang="uz">Kafe & Beshiklar</span><span data-lang="ru">Кафе & Беседки</span></a>
           </li>
-          <li><a href="#"><span data-lang="uz">Uycha & Kottejlar</span><span data-lang="ru">Домики & Коттеджи</span></a>
-          </li>
           <li><a href="#"><span data-lang="uz">Kemping & To'pchon</span><span data-lang="ru">Кемпинг &
                 Топчаны</span></a></li>
-          <li><a href="#"><span data-lang="uz">Baliq ovlash</span><span data-lang="ru">Рыбалка</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -3061,9 +3059,6 @@
     <div class="footer-bottom">
       <div class="footer-copy">© 2025 Meridian Tudakul. <span data-lang="uz">Barcha huquqlar himoyalangan.</span><span
           data-lang="ru">Все права защищены.</span></div>
-      <div class="footer-copy"><span data-lang="uz">O'zbekistonda tayyorlangan</span><span data-lang="ru">Сделано в
-          Узбекистане</span> <i class="fa-solid fa-heart" style="color:var(--gold);font-size:10px"></i></div>
-    </div>
   </footer>
 
   <script>
