@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian Tudakul — Ваш оазис у воды</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --gold: #c8a96e;
+      --gold-light: #e8d5a3;
+      --dark: #0d1117;
+      --deep: #111820;
+      --teal: #1a4a5a;
+      --teal-light: #2a6a80;
+      --cream: #f5efe6;
+      --text-muted: #8a9aaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: difference;
+    }
+
+    /* .cursor-follow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(200, 169, 110, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.3s ease;
+    } */
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 16px 60px;
+      border-bottom: 1px solid rgba(200, 169, 110, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      margin-left: 32px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-video-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 17, 23, 0.72) 0%, rgba(26, 74, 90, 0.3) 50%, rgba(13, 17, 23, 0.82) 100%);
+    }
+
+    .hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: slowzoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowzoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 8vw, 110px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-subtitle {
+      margin-top: 28px;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 480px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+
+    .btn-primary {
+      padding: 16px 44px;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      transform: translateX(-100%);
+      transition: transform 0.4s;
+    }
+
+    .btn-primary:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-secondary {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s;
+      cursor: none;
+    }
+
+    .btn-secondary:hover {
+      color: var(--gold);
+    }
+
+    .btn-secondary .arrow {
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+      transition: width 0.3s;
+    }
+
+    .btn-secondary:hover .arrow {
+      width: 48px;
+    }
+
+    .btn-secondary .arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -3px;
+      width: 7px;
+      height: 7px;
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+
+    .scroll-text {
+      writing-mode: vertical-rl;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(var(--gold), transparent);
+      animation: scrollline 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollline {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+
+      51% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
+
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    /* STATS */
+    .stats-bar {
+      background: var(--teal);
+      border-top: 1px solid rgba(200, 169, 110, 0.2);
+      border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+      padding: 32px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 8px;
+    }
+
+    section {
+      padding: 120px 60px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 80px;
+    }
+
+    .about-images {
+      position: relative;
+      height: 600px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 75%;
+      height: 80%;
+      object-fit: cover;
+      border: 3px solid rgba(200, 169, 110, 0.2);
+    }
+
+    .about-img-sub {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 55%;
+      height: 55%;
+      object-fit: cover;
+      border: 3px solid rgba(200, 169, 110, 0.2);
+      box-shadow: -20px -20px 0 rgba(26, 74, 90, 0.5);
+    }
+
+    .about-badge {
+      position: absolute;
+      left: 55%;
+      top: 38%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .about-badge span:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .about-badge span:last-child {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .about-text p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 20px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(200, 169, 110, 0.1);
+      border: 1px solid rgba(200, 169, 110, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 15px;
+    }
+
+    .feature-name {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 8px;
+    }
+
+    /* GALLERY MASONRY */
+    .gallery-section {
+      background: var(--deep);
+      padding: 120px 0;
+    }
+
+    .gallery-header {
+      padding: 0 60px;
+      margin-bottom: 60px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(3, 260px);
+      gap: 6px;
+      padding: 0 60px;
+    }
+
+    .g-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .g-item:nth-child(1) {
+      grid-column: span 5;
+      grid-row: span 2;
+    }
+
+    .g-item:nth-child(2) {
+      grid-column: span 4;
+    }
+
+    .g-item:nth-child(3) {
+      grid-column: span 3;
+    }
+
+    .g-item:nth-child(4) {
+      grid-column: span 3;
+    }
+
+    .g-item:nth-child(5) {
+      grid-column: span 4;
+    }
+
+    .g-item:nth-child(6) {
+      grid-column: span 4;
+      grid-row: span 1;
+    }
+
+    .g-item:nth-child(7) {
+      grid-column: span 4;
+    }
+
+    .g-item:nth-child(8) {
+      grid-column: span 4;
+    }
+
+    .g-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease, filter 0.5s ease;
+      filter: brightness(0.85);
+    }
+
+    .g-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1);
+    }
+
+    .g-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 17, 23, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .g-item:hover::after {
+      opacity: 1;
+    }
+
+    .g-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s;
+    }
+
+    .g-item:hover .g-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .g-overlay span {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* AMENITIES */
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 80px;
+    }
+
+    .amenity-card {
+      background: var(--deep);
+      padding: 40px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .amenity-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.5s;
+    }
+
+    .amenity-card:hover {
+      background: rgba(26, 74, 90, 0.3);
+    }
+
+    .amenity-card:hover::before {
+      width: 100%;
+    }
+
+    .amenity-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(200, 169, 110, 0.4);
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+    }
+
+    .amenity-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: rgba(200, 169, 110, 0.08);
+      border: 1px solid rgba(200, 169, 110, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .amenity-card:hover .amenity-icon-wrap {
+      background: rgba(200, 169, 110, 0.15);
+    }
+
+    .amenity-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .amenity-desc {
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ACCOMMODATIONS */
+    .accom-section {
+      background: var(--deep);
+    }
+
+    .accom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 80px;
+    }
+
+    .accom-card {
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .accom-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      filter: brightness(0.8);
+    }
+
+    .accom-card:hover img {
+      transform: scale(1.07);
+      filter: brightness(1);
+    }
+
+    .accom-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 28px;
+      background: linear-gradient(to top, rgba(13, 17, 23, 0.95) 0%, transparent 100%);
+      transform: translateY(8px);
+      transition: transform 0.4s;
+    }
+
+    .accom-card:hover .accom-info {
+      transform: translateY(0);
+    }
+
+    .accom-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .accom-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .accom-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+    }
+
+    .accom-features-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .accom-feat {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .accom-feat i {
+      color: var(--gold);
+      font-size: 11px;
+    }
+
+    /* POOLS SECTION */
+    .pools-section {
+      padding: 120px 60px;
+    }
+
+    .pools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 80px;
+    }
+
+    .pool-card {
+      position: relative;
+      overflow: hidden;
+      height: 500px;
+    }
+
+    .pool-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      filter: brightness(0.7);
+    }
+
+    .pool-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.9);
+    }
+
+    .pool-card-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 40px;
+      background: linear-gradient(to top, rgba(13, 17, 23, 0.9) 0%, rgba(13, 17, 23, 0.1) 60%, transparent 100%);
+    }
+
+    .pool-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .pool-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .pool-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      max-width: 380px;
+    }
+
+    .pool-specs {
+      display: flex;
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .pool-spec {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .pool-spec i {
+      color: var(--gold);
+    }
+
+    /* PARTY SECTION */
+    .party-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      padding: 20px 0px;
+    }
+
+    .party-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .party-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35) saturate(1.4);
+    }
+
+    .party-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 17, 23, 0.7) 0%, rgba(26, 74, 90, 0.4) 100%);
+    }
+
+    .party-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px;
+      width: 100%;
+    }
+
+    .party-inner {
+      max-width: 700px;
+    }
+
+    .party-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .party-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .party-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 300;
+      line-height: 0.95;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    .party-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .party-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    .party-days {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .party-day {
+      padding: 20px 32px;
+      border: 1px solid rgba(200, 169, 110, 0.4);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .party-day::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateY(100%);
+      transition: transform 0.4s;
+    }
+
+    .party-day:hover::before {
+      transform: translateY(0);
+    }
+
+    .party-day:hover .day-name,
+    .party-day:hover .day-label {
+      color: var(--dark);
+    }
+
+    .day-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s;
+    }
+
+    .day-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s;
+    }
+
+    .party-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .party-feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      padding: 10px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .party-feat i {
+      color: var(--gold);
+      font-size: 13px;
+    }
+
+    .party-photos {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 380px;
+    }
+
+    .party-photo {
+      overflow: hidden;
+    }
+
+    .party-photo img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.8);
+      transition: all 0.5s;
+    }
+
+    .party-photo:hover img {
+      filter: brightness(1);
+      transform: scale(1.04);
+    }
+
+    .party-photo:nth-child(1) {
+      height: 220px;
+    }
+
+    .party-photo:nth-child(1) img {
+      height: 220px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: var(--teal);
+    }
+
+    .testimonials-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonial-item {
+      display: none;
+    }
+
+    .testimonial-item.active {
+      display: block;
+    }
+
+    .quote-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      line-height: 0.5;
+      color: rgba(200, 169, 110, 0.2);
+      margin-bottom: 32px;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+    }
+
+    .quote-author {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .quote-stars {
+      color: var(--gold);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 48px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: none;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    /* LOCATION */
+    .location-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 600px;
+    }
+
+    .location-map {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .location-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.6) brightness(0.7);
+      transition: filter 0.5s;
+    }
+
+    .location-map:hover img {
+      filter: saturate(0.8) brightness(0.85);
+    }
+
+    .map-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .pin-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin: 0 auto 4px;
+      box-shadow: 0 0 0 6px rgba(200, 169, 110, 0.2), 0 0 0 12px rgba(200, 169, 110, 0.1);
+      animation: pin-pulse 2s ease infinite;
+    }
+
+    @keyframes pin-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 6px rgba(200, 169, 110, 0.2), 0 0 0 12px rgba(200, 169, 110, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 0 10px rgba(200, 169, 110, 0.15), 0 0 0 20px rgba(200, 169, 110, 0.05);
+      }
+    }
+
+    .pin-label {
+      background: rgba(13, 17, 23, 0.9);
+      border: 1px solid rgba(200, 169, 110, 0.3);
+      padding: 8px 16px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .location-info {
+      background: var(--deep);
+      padding: 80px 60px;
+    }
+
+    .location-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .location-detail:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .detail-icon {
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+      width: 28px;
+      text-align: center;
+    }
+
+    .detail-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #080c10;
+      padding: 80px 60px 40px;
+      border-top: 1px solid rgba(200, 169, 110, 0.1);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.4);
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      transition: all 0.3s;
+      cursor: none;
+    }
+
+    .social-btn:hover {
+      border-color: var(--gold);
+      background: rgba(200, 169, 110, 0.1);
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .reveal-delay-5 {
+      transition-delay: 0.5s;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .deco-line {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .deco-line::before,
+    .deco-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(200, 169, 110, 0.2);
+    }
+
+    .deco-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    /* HORIZONTAL IMAGES ROW */
+    .img-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 0 60px;
+      margin-top: -6px;
+    }
+
+    .img-strip img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: brightness(0.75);
+      transition: filter 0.4s, transform 0.5s;
+    }
+
+    .img-strip img:hover {
+      filter: brightness(1);
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 1100px) {
+      .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .party-photos {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px 24px;
+      }
+
+      nav.scrolled {
+        padding: 14px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 24px;
+      }
+
+      .hero-content {
+        padding: 0 24px;
+      }
+
+      .hero-title {
+        font-size: 52px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-images {
+        height: 400px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .g-item:nth-child(n) {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        height: 200px;
+      }
+
+      .amenities-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 24px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .location-section {
+        grid-template-columns: 1fr;
+      }
+
+      .location-map {
+        height: 300px;
+      }
+
+      .hero-scroll {
+        display: none;
+      }
+
+      .pools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .accom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .party-content {
+        padding: 0 24px;
+      }
+
+      .party-days {
+        flex-wrap: wrap;
+      }
+
+      .img-strip {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 24px;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor,
+      .cursor-follow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follow" id="cursorFollow"></div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-logo">Meridian</div>
+    <div class="nav-links">
+      <a href="#about">О нас</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#pools">Бассейны</a>
+      <a href="#amenities">Услуги</a>
+      <a href="#accommodation">Проживание</a>
+      <a href="#party">Вечеринки</a>
+      <a href="#location">Контакты</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-video-wrap">
+      <img class="hero-bg" src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=1800&q=85"
+        alt="Тудакуль — закат над водой">
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Бухара · Тудакуль</div>
+      <h1 class="hero-title">Meridian<br><em>Tudakul</em></h1>
+      <p class="hero-subtitle">Роскошная база отдыха на берегу живописного водохранилища — ваш личный оазис посреди
+        пустыни Центральной Азии</p>
+      <div class="hero-cta">
+        <a href="#amenities" class="btn-primary"><span>Узнать больше</span></a>
+        <a href="#gallery" class="btn-secondary">
+          <span class="arrow"></span>
+          Смотреть галерею
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-text">Прокрутить</div>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item reveal">
+      <div class="stat-number">60<span style="font-size:28px">м</span></div>
+      <div class="stat-label">Длина бассейна</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number">210</div>
+      <div class="stat-label">км² водохранилища</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number">26</div>
+      <div class="stat-label">км от Бухары</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Бассейна</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-tag reveal">О нас</div>
+    <h2 class="section-title reveal">Ваш личный<br><em>оазис у воды</em></h2>
+    <div class="about-grid">
+      <div class="about-images reveal">
+        <img class="about-img-main" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80"
+          alt="Пляж Meridian Tudakul">
+        <img class="about-img-sub" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80"
+          alt="Отдых на воде">
+        <div class="about-badge"><span>№1</span><span>Бухара</span></div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <div class="deco-line">
+          <div class="deco-diamond"></div>
+        </div>
+        <p><strong style="color:var(--gold)">Meridian Tudakul</strong> — это премиальная зона отдыха на берегу
+          величественного Тудакульского водохранилища, расположенного всего в 26 км от древней Бухары.</p>
+        <p>Здесь пустыня встречается с водой, а старинная культура Шёлкового пути гармонично переплетается с современным
+          европейским комфортом. Два бассейна, частный пляж, коттеджи, беседки и первоклассный сервис ждут вас.</p>
+        <p>Будь то семейный отдых, романтический уикенд, корпоративное мероприятие или незабываемая вечеринка — Meridian
+          создаёт впечатления для каждого гостя.</p>
+        <div class="about-features">
+          <div class="feature-item reveal reveal-delay-1">
+            <div class="feature-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+            <div class="feature-name">Частный пляж</div>
+          </div>
+          <div class="feature-item reveal reveal-delay-2">
+            <div class="feature-icon"><i class="fa-solid fa-person-swimming"></i></div>
+            <div class="feature-name">2 Бассейна</div>
+          </div>
+          <div class="feature-item reveal reveal-delay-3">
+            <div class="feature-icon"><i class="fa-solid fa-house-chimney"></i></div>
+            <div class="feature-name">Домики & Коттеджи</div>
+          </div>
+          <div class="feature-item reveal reveal-delay-4">
+            <div class="feature-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="feature-name">Кафе & Ресторан</div>
+          </div>
+          <div class="feature-item reveal reveal-delay-2">
+            <div class="feature-icon"><i class="fa-solid fa-paw"></i></div>
+            <div class="feature-name">Можно с питомцами</div>
+          </div>
+          <div class="feature-item reveal reveal-delay-3">
+            <div class="feature-icon"><i class="fa-solid fa-wifi"></i></div>
+            <div class="feature-name">Wi-Fi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery-section" id="gallery">
+    <div class="gallery-header">
+      <div class="section-tag reveal">Галерея</div>
+      <h2 class="section-title reveal">Живые <em>впечатления</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80" alt="Пляж">
+        <div class="g-overlay"><span>Пляж</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=700&q=80" alt="Бассейн">
+        <div class="g-overlay"><span>Бассейн</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=80" alt="Кафе">
+        <div class="g-overlay"><span>Кафе</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80" alt="Закат">
+        <div class="g-overlay"><span>Закат</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-4">
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=700&q=80" alt="Отдых">
+        <div class="g-overlay"><span>Отдых</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&q=80" alt="Вода">
+        <div class="g-overlay"><span>Водохранилище</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=700&q=80" alt="Беседка">
+        <div class="g-overlay"><span>Беседки</span></div>
+      </div>
+      <div class="g-item reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80" alt="Коттедж">
+        <div class="g-overlay"><span>Коттеджи</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE STRIP -->
+  <div class="img-strip" style="background:var(--deep);padding-top:6px;padding-bottom:0;">
+    <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1498855926480-d98e83099315?w=600&q=80" alt="">
+  </div>
+
+  <!-- POOLS SECTION -->
+  <section class="pools-section" id="pools">
+    <div class="section-tag reveal">Бассейны</div>
+    <h2 class="section-title reveal">Два мира<br><em>воды и неба</em></h2>
+    <div class="pools-grid">
+      <div class="pool-card reveal">
+        <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=900&q=80" alt="Взрослый бассейн">
+        <div class="pool-card-inner">
+          <div class="pool-badge">Взрослый</div>
+          <div class="pool-name">Олимпийский бассейн</div>
+          <div class="pool-desc">Бассейн длиной 60 метров с кристально чистой водой, профессиональными дорожками и
+            зонами отдыха. Идеален для плавания и активного отдыха.</div>
+          <div class="pool-specs">
+            <div class="pool-spec"><i class="fa-solid fa-ruler-horizontal"></i> 60 м длина</div>
+            <div class="pool-spec"><i class="fa-solid fa-water"></i> Чистая вода</div>
+            <div class="pool-spec"><i class="fa-solid fa-sun"></i> Лежаки & Зонтики</div>
+          </div>
+        </div>
+      </div>
+      <div class="pool-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1600965962102-9d260a71890d?w=900&q=80" alt="Детский бассейн">
+        <div class="pool-card-inner">
+          <div class="pool-badge"
+            style="background:rgba(200,169,110,0.15);color:var(--gold);border:1px solid rgba(200,169,110,0.4)">Детский /
+            Семейный</div>
+          <div class="pool-name">Семейный бассейн</div>
+          <div class="pool-desc">Безопасный мелководный бассейн для детей с горками, фонтанчиками и игровыми элементами.
+            Родители могут наблюдать с удобных лежаков рядом.</div>
+          <div class="pool-specs">
+            <div class="pool-spec"><i class="fa-solid fa-child"></i> Для детей</div>
+            <div class="pool-spec"><i class="fa-solid fa-shield"></i> Безопасно</div>
+            <div class="pool-spec"><i class="fa-solid fa-slide"></i> Горки & Игры</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section id="amenities" style="background: var(--deep); padding-top: 0; padding-bottom: 120px;">
+    <div style="padding: 120px 60px 0;">
+      <div class="section-tag reveal">Услуги</div>
+      <h2 class="section-title reveal">Всё для<br><em>идеального отдыха</em></h2>
+    </div>
+    <div class="amenities-grid" style="padding: 0 60px; margin-top: 60px;">
+      <div class="amenity-card reveal">
+        <div class="amenity-number">01</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-umbrella-beach"></i></div>
+        <div class="amenity-title">Частный пляж</div>
+        <div class="amenity-desc">Обустроенный песчаный берег Тудакульского водохранилища с кристально чистой водой и
+          захватывающими закатами</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-1">
+        <div class="amenity-number">02</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-person-swimming"></i></div>
+        <div class="amenity-title">2 Бассейна</div>
+        <div class="amenity-desc">Взрослый олимпийский бассейн 60 м и семейный детский бассейн с горками — для отдыха
+          всей семьёй</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-2">
+        <div class="amenity-number">03</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-fire-flame-curved"></i></div>
+        <div class="amenity-title">Баня & Спа</div>
+        <div class="amenity-desc">Традиционная баня с современным оснащением для полноценного восстановления и глубокого
+          расслабления</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-3">
+        <div class="amenity-number">04</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+        <div class="amenity-title">Кафе & Ресторан</div>
+        <div class="amenity-desc">Узбекская и европейская кухня, свежие блюда на мангале. Панорамный вид на
+          водохранилище</div>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-number">05</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-tree"></i></div>
+        <div class="amenity-title">Беседки</div>
+        <div class="amenity-desc">Уютные беседки на любой вкус — от небольших романтичных до больших семейных с мангалом
+          и всем необходимым</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-1">
+        <div class="amenity-number">06</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-children"></i></div>
+        <div class="amenity-title">Детская площадка</div>
+        <div class="amenity-desc">Современная и безопасная зона для детей с аттракционами, горками и игровыми
+          комплексами</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-2">
+        <div class="amenity-number">07</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-campground"></i></div>
+        <div class="amenity-title">Кемпинг & Топчаны</div>
+        <div class="amenity-desc">Зоны для кемпинга под открытым небом и традиционные топчаны с тенью — настоящий
+          восточный отдых у воды</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-3">
+        <div class="amenity-number">08</div>
+        <div class="amenity-icon-wrap"><i class="fa-solid fa-square-parking"></i></div>
+        <div class="amenity-title">Парковка</div>
+        <div class="amenity-desc">Просторная охраняемая парковка на территории комплекса для комфортного приезда на
+          личном автомобиле</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRA IMAGE STRIP -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--dark);">
+    <img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=700&q=80" alt=""
+      style="width:100%;height:280px;object-fit:cover;filter:brightness(0.75);transition:filter 0.4s;"
+      onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.75)'">
+    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700&q=80" alt=""
+      style="width:100%;height:280px;object-fit:cover;filter:brightness(0.75);transition:filter 0.4s;"
+      onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.75)'">
+    <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=700&q=80" alt=""
+      style="width:100%;height:280px;object-fit:cover;filter:brightness(0.75);transition:filter 0.4s;"
+      onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.75)'">
+  </div>
+
+  <!-- ACCOMMODATION -->
+  <section id="accommodation">
+    <div class="section-tag reveal">Проживание</div>
+    <h2 class="section-title reveal">Домики, коттеджи<br><em>и кемпинг</em></h2>
+    <p class="reveal"
+      style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:16px;max-width:560px;line-height:1.8;letter-spacing:1px;">
+      От уютных деревянных домиков у воды до просторных коттеджей для большой компании — выберите формат, который вам по
+      душе
+    </p>
+    <div class="accom-grid">
+      <div class="accom-card reveal">
+        <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?w=800&q=80" alt="Домики у воды">
+        <div class="accom-info">
+          <div class="accom-tag">Проживание</div>
+          <div class="accom-name">Домики у воды</div>
+          <div class="accom-desc">Уютные деревянные домики в нескольких шагах от берега. Идеальны для пар и небольших
+            семей.</div>
+          <div class="accom-features-row">
+            <div class="accom-feat"><i class="fa-solid fa-bed"></i> 2–4 чел.</div>
+            <div class="accom-feat"><i class="fa-solid fa-wifi"></i> Wi-Fi</div>
+            <div class="accom-feat"><i class="fa-solid fa-snowflake"></i> Кондиционер</div>
+          </div>
+        </div>
+      </div>
+      <div class="accom-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80" alt="Коттеджи">
+        <div class="accom-info">
+          <div class="accom-tag">Проживание</div>
+          <div class="accom-name">Коттеджи</div>
+          <div class="accom-desc">Просторные коттеджи для больших семей и компаний с террасой, барбекю и панорамным
+            видом.</div>
+          <div class="accom-features-row">
+            <div class="accom-feat"><i class="fa-solid fa-users"></i> 6–12 чел.</div>
+            <div class="accom-feat"><i class="fa-solid fa-fire"></i> Барбекю</div>
+            <div class="accom-feat"><i class="fa-solid fa-car"></i> Парковка</div>
+          </div>
+        </div>
+      </div>
+      <div class="accom-card reveal reveal-delay-4">
+        <img src="./images/image_1.png" alt="Кемпинг">
+        <div class="accom-info">
+          <div class="accom-tag">На природе</div>
+          <div class="accom-name">Зона кемпинга</div>
+          <div class="accom-desc">Ночь под звёздами у водохранилища. Топчаны, навесы, костровые зоны и всё необходимое
+            для романтики природы.</div>
+          <div class="accom-features-row">
+            <div class="accom-feat"><i class="fa-solid fa-moon"></i> Ночёвка</div>
+            <div class="accom-feat"><i class="fa-solid fa-campground"></i> Топчаны</div>
+            <div class="accom-feat"><i class="fa-solid fa-star"></i> Под звёздами</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTY SECTION -->
+  <div class="party-section" id="party">
+    <div class="party-bg">
+      <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&q=80" alt="Вечеринка">
+    </div>
+    <div class="party-content">
+      <div class="party-inner">
+        <div class="party-tag reveal"><i class="fa-solid fa-music" style="margin-right:4px"></i> Каждую неделю</div>
+        <div class="party-title reveal">
+          Субботние<br>и воскресные<br><em>вечеринки</em>
+        </div>
+        <p class="party-desc reveal">
+          Каждую неделю — в субботу и воскресенье — Meridian Tudakul превращается в главную вечеринку под открытым
+          небом. Музыка, танцы, свет над водой, живая атмосфера и незабываемые ночи у берега.
+        </p>
+        <div class="party-days reveal">
+          <div class="party-day">
+            <div class="day-name">Суббота</div>
+            <div class="day-label">Каждую неделю</div>
+          </div>
+          <div class="party-day">
+            <div class="day-name">Воскресенье</div>
+            <div class="day-label">Каждую неделю</div>
+          </div>
+        </div>
+        <div class="party-features reveal">
+          <div class="party-feat"><i class="fa-solid fa-music"></i> Живая музыка & DJ</div>
+          <div class="party-feat"><i class="fa-solid fa-martini-glass"></i> Напитки & Бар</div>
+          <div class="party-feat"><i class="fa-solid fa-lightbulb"></i> Световое шоу</div>
+          <div class="party-feat"><i class="fa-solid fa-water"></i> Party у бассейна</div>
+          <div class="party-feat"><i class="fa-solid fa-fire-flame-curved"></i> Барбекю & Мангал</div>
+          <div class="party-feat"><i class="fa-solid fa-ticket"></i> Вход свободный</div>
+        </div>
+      </div>
+      <div class="party-photos">
+        <div class="party-photo">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=80" alt="Party">
+        </div>
+        <div class="party-photo">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80" alt="Party">
+        </div>
+        <div class="party-photo">
+          <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=500&q=80" alt="Party">
+        </div>
+        <div class="party-photo">
+          <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=500&q=80" alt="Party">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-tag reveal" style="justify-content:center">Отзывы</div>
+      <h2 class="section-title reveal" style="text-align:center">Что говорят <em>гости</em></h2>
+      <div style="margin-top:60px">
+        <div class="testimonial-item active">
+          <div class="quote-icon">"</div>
+          <div class="quote-stars">★★★★★</div>
+          <div class="quote-text">Настоящий оазис у воды! Два бассейна, чистый пляж, внимательный персонал. Приезжали с
+            семьёй на выходные — дети в восторге от детского бассейна. Обязательно вернёмся!</div>
+          <div class="quote-author">— Санжар Р., Бухара</div>
+        </div>
+        <div class="testimonial-item">
+          <div class="quote-icon">"</div>
+          <div class="quote-stars">★★★★★</div>
+          <div class="quote-text">Meridian Tudakul — совершенно другой уровень. Коттедж у воды, европейский комфорт,
+            узбекская кухня, закат над водохранилищем. Воскресная вечеринка — огонь!</div>
+          <div class="quote-author">— Малика Х., Самарканд</div>
+        </div>
+        <div class="testimonial-item">
+          <div class="quote-icon">"</div>
+          <div class="quote-stars">★★★★★</div>
+          <div class="quote-text">Были на корпоративе — всё на высшем уровне. Беседки, мангал, баня, кемпинг под
+            звёздами. Коллеги до сих пор вспоминают с улыбкой. Рекомендую!</div>
+          <div class="quote-author">— Аброр Т., Ташкент</div>
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        <div class="dot active" onclick="setTestimonial(0)"></div>
+        <div class="dot" onclick="setTestimonial(1)"></div>
+        <div class="dot" onclick="setTestimonial(2)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <div class="location-section" id="location">
+    <div class="location-map">
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1000&q=80" alt="Карта">
+      <div class="map-pin">
+        <div class="pin-dot"></div>
+        <div class="pin-label">Meridian Tudakul</div>
+      </div>
+    </div>
+    <div class="location-info">
+      <div class="section-tag reveal">Как добраться</div>
+      <h2 class="section-title reveal" style="font-size:44px">Найдите <em>нас</em></h2>
+      <div style="margin-top:48px">
+        <div class="location-detail reveal">
+          <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="detail-label">Адрес</div>
+            <div class="detail-value">Кызылтепинский район,<br>Навоийская область, Узбекистан<br><span
+                style="color:var(--gold);font-size:12px">Рядом с озером Тудакуль</span></div>
+          </div>
+        </div>
+        <div class="location-detail reveal reveal-delay-1">
+          <div class="detail-icon"><i class="fa-solid fa-car"></i></div>
+          <div>
+            <div class="detail-label">От Бухары</div>
+            <div class="detail-value">26 км · ~30 минут на авто<br>Просторная парковка на территории</div>
+          </div>
+        </div>
+        <div class="location-detail reveal reveal-delay-2">
+          <div class="detail-icon"><i class="fa-brands fa-instagram"></i></div>
+          <div>
+            <div class="detail-label">Контакты</div>
+            <div class="detail-value">
+              <a href="https://www.instagram.com/meridian_tudakul/" target="_blank"
+                style="color:var(--gold);text-decoration:none">@meridian_tudakul</a><br>
+              <span style="font-size:12px;color:rgba(255,255,255,0.4)">Instagram · WhatsApp</span>
+            </div>
+          </div>
+        </div>
+        <div class="location-detail reveal reveal-delay-3">
+          <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <div class="detail-label">Часы работы</div>
+            <div class="detail-value">Сезонно — лето<br>Ежедневно: 09:00 — 22:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Meridian</div>
+        <div class="footer-desc">Премиальная база отдыха на берегу Тудакульского водохранилища. Ваш оазис в сердце
+          Центральной Азии.</div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/meridian_tudakul/" target="_blank" class="social-btn"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#gallery">Галерея</a></li>
+          <li><a href="#pools">Бассейны</a></li>
+          <li><a href="#amenities">Услуги</a></li>
+          <li><a href="#accommodation">Проживание</a></li>
+          <li><a href="#party">Вечеринки</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#">Пляж & 2 Бассейна</a></li>
+          <li><a href="#">Баня & Спа</a></li>
+          <li><a href="#">Кафе & Беседки</a></li>
+          <li><a href="#">Домики & Коттеджи</a></li>
+          <li><a href="#">Кемпинг & Топчаны</a></li>
+          <li><a href="#">Рыбалка</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/meridian_tudakul/" target="_blank">@meridian_tudakul</a></li>
+          <li><a href="#">Кызылтепинский район</a></li>
+          <li><a href="#">Навоийская область</a></li>
+          <li><a href="#">26 км от Бухары</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Meridian Tudakul. Все права защищены.</div>
+      <div class="footer-copy">Сделано с <i class="fa-solid fa-heart" style="color:var(--gold);font-size:10px"></i> в
+        Узбекистане</div>
+    </div>
+  </footer>
+
+  <script>
+    // CURSOR
+    const cursor = document.getElementById('cursor');
+    const cursorFollow = document.getElementById('cursorFollow');
+    let mx = 0, my = 0, fx = 0, fy = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top = my - 6 + 'px';
+    });
+    function animateCursor() {
+      fx += (mx - fx) * 0.12; fy += (my - fy) * 0.12;
+      cursorFollow.style.left = fx - 20 + 'px';
+      cursorFollow.style.top = fy - 20 + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a, button, .dot, .party-day').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; cursorFollow.style.transform = 'scale(1.5)'; });
+      el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursorFollow.style.transform = 'scale(1)'; });
+    });
+
+    // NAVBAR
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 80));
+
+    // SCROLL REVEAL
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // TESTIMONIALS
+    let currentTest = 0;
+    const items = document.querySelectorAll('.testimonial-item');
+    const dots = document.querySelectorAll('.dot');
+    function setTestimonial(idx) {
+      items[currentTest].classList.remove('active');
+      dots[currentTest].classList.remove('active');
+      currentTest = idx;
+      items[currentTest].classList.add('active');
+      dots[currentTest].classList.add('active');
+    }
+    setInterval(() => setTestimonial((currentTest + 1) % items.length), 5000);
+
+    // COUNTER ANIMATION
+    function animateCounters() {
+      document.querySelectorAll('.stat-number').forEach(el => {
+        const text = el.innerText;
+        const num = parseFloat(text);
+        if (isNaN(num)) return;
+        let start = 0; const duration = 1500;
+        const step = (ts) => {
+          if (!step.start) step.start = ts;
+          const progress = Math.min((ts - step.start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * num) + (text.includes('м') ? 'м' : '');
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = text;
+        };
+        requestAnimationFrame(step);
+      });
+    }
+    const statsObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { animateCounters(); statsObserver.disconnect(); }
+    }, { threshold: 0.5 });
+    statsObserver.observe(document.querySelector('.stats-bar'));
+  </script>
+</body>
+</html>
